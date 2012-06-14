@@ -701,7 +701,7 @@ Q.resolve(new Date()).view().then(function (dateView) {
 }).then(console.log);
 ```
 
-## Flow composing
+## Composing flow 
 
 The former promise chains are just only single flow style.
 ``Q`` supports flow graph for complex flows.
@@ -896,8 +896,11 @@ Q.ninvoke(fs, "readFile", filename, encoding).then(console.log);
 
 ## New method names
 
-ECMAScript5 introduced contextual keywords.
-You can use names in keywords as custom property names.
+ECMAScript5 spritted 
+[Identifier and IdentifireName](http://es5.github.com/#x7.6).
+The IdentifireNames allows to use keyword name.
+
+Property names of ECMAScript5 uses IdentifireName (not Identifier).
 e.g.
 
 ```javascript
@@ -940,7 +943,7 @@ interface.
 (which has the ``then`` method).
 ``Q`` promise can chain from other implementation of promises.
 
-from jQuery-Deferred:
+from ``jQuery-Deferred``:
 ```javascript
 // interop-jquery-deferred.js
 var Q = require("q");
@@ -951,8 +954,7 @@ Q.when(otherPromise).then(console.log);
 otherPromise.resolve("OK from other");
 ```
 
-from node-promise:
-
+from ``node-promise``:
 ```javascript
 // interop-node-promise.js
 var Q = require("q");
@@ -963,8 +965,7 @@ Q.when(otherPromise).then(console.log);
 otherPromise.resolve("OK from other");
 ```
 
-from when:
-
+from ``when``:
 ```javascript
 var Q = require("q");
 var when = require("when");
