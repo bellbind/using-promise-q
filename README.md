@@ -683,6 +683,24 @@ promise.then(function (value) {
 })
 ```
 
+### ``view`` make all methods to promise method
+
+The ``promise.post(name)`` or ``promise.invoke(name)`` 
+convert a method of the promise value to a promise of the method result.
+
+A result of ``view()``  has methods for all methods of the promise value.
+You can use view in ``then`` callback of ``view()``.
+e.g.:
+
+```javascript
+// object-view.js
+Q.resolve(new Date()).view().then(function (dateView) {
+    return dateView.toTimeString().then(function (str) {
+        return /\((.*)\)/.exec(str)[0]
+    });
+}).then(console.log);
+```
+
 ## Flow composing
 
 The former promise chains are just only single flow style.
@@ -873,4 +891,86 @@ Q.npost(fs, "readFile", [filename, encoding]).then(console.log);
 
 ```javascript
 Q.ninvoke(fs, "readFile", filename, encoding).then(console.log);
+```
+
+
+## New method names
+
+ECMAScript5 introduced contextual keywords.
+You can use names in keywords as custom property names.
+e.g.
+
+```javascript
+var obj = {
+    new: function () {return Object.create(null)},
+};
+obj.new();
+```
+
+``Q`` promise supports new property names that 
+includes some of ES keywords names.
+
+- ``Q.begin(obj)`` is same as ``Q.resolve(obj)``
+- ``promise.delete(name)`` is same as ``promise.del(name)``
+- ``promise.try(arg1, arg2, ...)`` is same as ``promise.fcall(arg1, arg2, ...)``
+- ``promise.catch(callback)`` is same as ``promise.fail(callback)``
+- ``promise.finally(callback)`` is same as ``promise.fin(callback)``
+
+## Interoperability with other promise implementations
+
+There are many promise implementations in JavaScript.
+
+- [node-promise](https://github.com/kriszyp/node-promise)
+- [jQuery Deferred](http://api.jquery.com/category/deferred-object/)
+- [when](https://github.com/cujojs/when)
+
+All of them support
+[CommonJS Promises/A](http://wiki.commonjs.org/wiki/Promises/A)
+interface.
+
+"CommonJS Promise/A" sets standard interface for promise methods:
+
+- ``promise.then(fulfilledHandler, errorHandler, progressHandler)``
+- ``promise.get(propertyName)``
+- ``promise.call(functionName, arg1, arg2, ...)``
+
+``Q`` also supports them (progressHandler is just ignored).
+
+``Q.when(value)`` accepts "CommosJS Promise/A" promise 
+(which has the ``then`` method).
+``Q`` promise can chain from other implementation of promises.
+
+from jQuery-Deferred:
+```javascript
+// interop-jquery-deferred.js
+var Q = require("q");
+var $ = require("jquery-deferred");
+
+var otherPromise = $.Deferred();
+Q.when(otherPromise).then(console.log);
+otherPromise.resolve("OK from other");
+```
+
+from node-promise:
+
+```javascript
+// interop-node-promise.js
+var Q = require("q");
+var promise = require("node-promise");
+
+var otherPromise = new promise.Promise();
+Q.when(otherPromise).then(console.log);
+otherPromise.resolve("OK from other");
+```
+
+from when:
+
+```javascript
+var Q = require("q");
+var when = require("when");
+
+var otherDeferred = when.defer();
+var otherPromise = otherDeferred.promise;
+Q.when(otherPromise).then(console.log);
+otherDeferred.resolver.resolve("OK from other");
 ```
