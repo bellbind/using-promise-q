@@ -1,0 +1,57 @@
+<!doctype html>
+<html>
+<head>
+<!--
+If you have python, run "python -m SimpleHTTPServer" 
+then access "http://localhost:8000/using-q.html" with your browser.
+-->
+<script src="https://raw.github.com/kriskowal/q/master/q.min.js"></script>
+<script>
+var loadText = function (url) {
+    var deferred = Q.defer();
+    var req = new XMLHttpRequest();
+    req.onreadystatechange = function () {
+        if (req.readyState !== 4) return;
+        if (/^[^2]\d\d$/.exec(req.status)) return deferred.reject(req.status);
+        deferred.resolve(req.responseText);
+    };
+    req.open("GET", url, true);
+    req.send();
+    return deferred.promise;
+};
+
+window.addEventListener("load", function (event) {
+    var loadButton = document.getElementById("load");
+    var urlInput = document.getElementById("url");
+    var resultArea = document.getElementById("result");
+
+    loadButton.addEventListener("click", function (event) {
+        loadText(urlInput.value).then(function (text) {
+            resultArea.textContent = text;
+            // google-code-prettify
+            resultArea.innerHTML = prettyPrintOne(resultArea.innerHTML);
+        }).fail(alert);
+    }, false);
+}, false);
+</script>
+<script 
+  src="http://google-code-prettify.googlecode.com/svn/trunk/src/prettify.js"
+></script>
+<link rel="stylesheet" 
+  href="http://google-code-prettify.googlecode.com/svn/trunk/src/prettify.css"
+/>
+</head>
+<body>
+<input id="url" type="search" value="00readme.md" list="files" />
+<button id="load" type="button">load</button>
+<pre id="result" class="prettyprint"></pre>
+
+<datalist id="files">
+<option value="00readme.md" />
+<option value="using-callback.js" />
+<option value="using-nested-callback.js" />
+<option value="using-promise.js" />
+<option value="using-q.html" />
+</datalist>
+</body>
+</html>
