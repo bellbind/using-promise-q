@@ -897,10 +897,10 @@ Q.ninvoke(fs, "readFile", filename, encoding).then(console.log);
 ## New method names
 
 ECMAScript5 spritted 
-[Identifier and IdentifireName](http://es5.github.com/#x7.6).
-The IdentifireNames allows to use keyword name.
+[Identifier and IdentifierName](http://es5.github.com/#x7.6).
+The IdentifierName allows to use keyword names.
 
-Property names of ECMAScript5 uses IdentifireName (not Identifier).
+Property names of ECMAScript5 uses IdentifierName (not Identifier).
 e.g.
 
 ```javascript
