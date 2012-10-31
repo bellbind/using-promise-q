@@ -483,7 +483,7 @@ deferred.promise.spread(function (value1, value2) {
 deferred.resolve([10, 30]);
 '''
 
-## A promise of immidiate values
+## A promise of immediate values
 
 ### Resolved promise
 
