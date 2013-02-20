@@ -467,28 +467,28 @@ it prints "Not Found" as successful flow.
 
 ## A promise of multiple values and ``spread``
 
-``then`` callback always accepts just one argument.
-So you want to pass multiple values as a array form like ''[value1, value2]``.
-In callback, extract with array access like: ``var value1 = result[0];``.
+The `then` callback always accepts just one argument.
+So you want to pass multiple values as a array like `[value1, value2]`.
+In callback, extract with array access like: `var value1 = result[0];`.
 
 If you want to use multiple arguments directly, 
-you can use ``spread`` instead of ``then``:
+you can use `spread` instead of `then`:
 
-'''javascript
+```javascript
 // promise-multiple-resolve-spread-flow.js
-var deferred = O.defer();
+var deferred = Q.defer();
 deferred.promise.spread(function (value1, value2) {
     return value1 + value2;
 }).then(console.log);
 deferred.resolve([10, 30]);
-'''
+```
 
 ## A promise of immediate values
 
 ### Resolved promise
 
 Not only async action, usual value transform as a promise.
-``Q.resolve`` transforms value to promise:
+`Q.resolve` transforms value to promise:
 
 ```javascript
 // promise-resolve.js
@@ -501,8 +501,8 @@ other types of value is handled with same manner of promises.
 ### ``when``
 
 `Q.when(value, success, failure)` is same as
-``Q.resolve(value).then(success, failure)``
-(but ``then`` is implemented with ``when`` in really)
+`Q.resolve(value).then(success, failure)`
+(but `then`` is implemented with `when` in really)
 
 ```javascript
 // promise-when.js
@@ -511,7 +511,7 @@ Q.when("Hello", console.log);
 
 ### Rejected promise
 
-``Q.reject(obj)`` is "rejected" promise.
+`Q.reject(obj)` is "rejected" promise.
 it spawn only error handler. e.g.:
 
 ```javascript
