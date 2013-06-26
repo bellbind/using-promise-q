@@ -770,12 +770,20 @@ Q.all([
 });
 ```
 
-``Q.allResolved(promiselist)`` is similar ``Q.all``.
-``Q.all(ps)`` is a promise of values of ps,
-but ``Q.allResolved(ps)`` is a promise of resolved(success of failure) 
-promise list. The ``then`` callback args is an array of promise.
-(It is for just timing sync?)
 
+``Q.allSettled(promiselist)`` is similar ``Q.all``.
+``Q.all(ps)`` is a promise of values of ``ps``,
+but ``Q.allSettled(ps)`` is a promise of settled(success or failure)
+promise list. The ``then`` callback arg is an array of result object as:
+
+- ``{state: "fulfilled", value: resolvedValue}``
+- or
+- ``{state: "rejected", reason: rejectedError}``
+
+Joining with ``allSettled`` is better for execution based programs
+that focus on spawning procedures (not use the result values).
+
+(``allSettled`` is renamed form ``allResolved`` after q-0.9.4).
 
 ### `end` for abort
 
