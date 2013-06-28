@@ -685,7 +685,7 @@ promise.then(function (value) {
 
 ### ``view`` make all methods to promise method
 
-The ``promise.post(name)`` or ``promise.invoke(name)`` 
+The ``promise.post(name)`` or ``promise.send(name)`` 
 convert a method of the promise value to a promise of the method result.
 
 A result of ``view()``  has methods for all methods of the promise value.
@@ -859,11 +859,11 @@ It prints ``[Error: Timed out after 5000ms]`` when 5-sec after.
 
 ``Q`` has simple utility for node.js modules.
 
-- ``Q.napply(func, thisp, args)``
-- ``Q.ncall(func, thisp, arg1, arg2, ...)``
-- ``Q.nbind(func, thisp, arg1, arg2,...)``
+- ``Q.nfapply(func, args)``
+- ``Q.nfcall(func, arg1, arg2, ...)``
+- ``Q.nfbind(func, arg1, arg2,...)``
 - ``Q.npost(obj, name, args)``
-- ``Q.ninvoke(obj, name, arg1, arg2, ...)``
+- ``Q.nsend(obj, name, arg1, arg2, ...)``
 
 It is just for node.js standard IO module callback style, e.g.:
 
@@ -882,15 +882,15 @@ fs.readFile(filename, encoding, function (error, result) {
 The transformed examples are:
 
 ```javascript
-Q.napply(fs.readFile, fs, [filename, encoding]).then(console.log);
+Q.nfapply(fs.readFile, [filename, encoding]).then(console.log);
 ```
 
 ```javascript
-Q.ncall(fs.readFile, fs, filename, encoding).then(console.log);
+Q.nfcall(fs.readFile, filename, encoding).then(console.log);
 ```
 
 ```javascript
-Q.nbind(fs.readFile, fs)(filename, encoding).then(console.log);
+Q.nfbind(fs.readFile)(filename, encoding).then(console.log);
 ```
 
 ```javascript
@@ -898,7 +898,7 @@ Q.npost(fs, "readFile", [filename, encoding]).then(console.log);
 ```
 
 ```javascript
-Q.ninvoke(fs, "readFile", filename, encoding).then(console.log);
+Q.nsend(fs, "readFile", filename, encoding).then(console.log);
 ```
 
 
