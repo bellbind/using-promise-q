@@ -610,7 +610,7 @@ promise.then(function (value) {
 })
 ```
 
-``promise.innvoke(name, arg1, arg2,...)``:
+``promise.send(name, arg1, arg2,...)``:
 ```javascript
 promise.then(function (value) {
     return value[name].call(value, arg1, arg2, ...);
