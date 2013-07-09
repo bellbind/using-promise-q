@@ -785,17 +785,17 @@ that focus on spawning procedures (not use the result values).
 
 (``allSettled`` is renamed form ``allResolved`` after q-0.9.4).
 
-### `end` for abort
+### `done` for abort
 
-``promise.end()`` is for abort the program entirely.
+``promise.done()`` is for abort the program entirely.
 
 If the ``promise`` is rejected (and not catched error before),
-`end()` forcely spawn uncaughtable error (e.g. 
+`done()` forcely spawn uncaughtable error (e.g. 
 ``setTimeout(function () {throw ex;}, 0)``).
 
-On node.js REPL, run ``Q.reject("uncaught").end()``, then exit with an error.
+On node.js REPL, run ``Q.reject("uncaught").done()``, then exit with an error.
 
-If error reached to the ``end()``, you could think it just a *programming bug*
+If error reached to the ``done()``, you could think it just a *programming bug*
 (not exception state).
 
 ### ``fin`` for common processing success or fail handlers

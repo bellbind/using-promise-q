@@ -1,3 +1,3 @@
 var Q = require("q");
 
-Q.reject("uncaught").end();  // abort
+Q.reject("uncaught").done();  // abort
