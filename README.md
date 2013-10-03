@@ -718,7 +718,7 @@ one flow is to print to log, other flows are to converting.
 // chain-concurrent.js
 var text = httpGet(url.parse("http://example.biz")).then(function (res) {
     return httpGet(url.parse(res.headers["location"]));
-}).then(loadBody);.fail(function (error) {
+}).then(loadBody).fail(function (error) {
     return "Not Found";
 });
 
@@ -807,9 +807,9 @@ If error reached to the ``done()``, you could think it just a *programming bug*
 promise.fin(function () {
     console.log("resolved");
 }).then(function (value) {
-   console.log("success " + value);
+    console.log("success " + value);
 }, function (error) {
-   console.log("failure " + error);
+    console.log("failure " + error);
 });
 ```
 
