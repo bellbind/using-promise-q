@@ -319,7 +319,7 @@ getBody("http://example.org").then(console.log);
 The first returns promise of ``res``(http.ClientResponse) 
 that returns ``res``.
 The second returns just ``res``.
-every ``return`` of branch should finnaly resolve same type object.
+every ``return`` of branch should finally resolve same type object.
 
 Branch in promise action is with this manner.
 
@@ -502,7 +502,7 @@ other types of value is handled with same manner of promises.
 
 `Q.when(value, success, failure)` is same as
 `Q.resolve(value).then(success, failure)`
-(but `then`` is implemented with `when` in really)
+(but `then` is implemented with `when` in really)
 
 ```javascript
 // promise-when.js
@@ -551,7 +551,7 @@ For example:
 ```javascript
 // object-unsued.js
 httpGet(url.parse("http://example.org")).then(function (res) {
-    return res.headers["location"].resplace(/^http:/, "");
+    return res.headers["location"].replace(/^http:/, "");
 }).then(console.log);
 ```
 
