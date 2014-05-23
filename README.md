@@ -26,7 +26,7 @@ http.get(url.parse("http://example.org/"), function (res) {
 });
 ```
 
-If you want to chain contimuous asynchronous actions,
+If you want to chain continuous asynchronous actions,
 following callbacks are *nested* in the callback of the former action;
 e.g.:
 
