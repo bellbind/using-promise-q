@@ -576,7 +576,7 @@ By them, the decomposed actions also translate to:
 ```javascript
 // object.primitive.js
 httpGet(url.parse("http://example.org"))
-    .get("handlers").get("location").post("replace", [/^http:/, ""])
+    .get("headers").get("location").post("replace", [/^http:/, ""])
     .then(console.log);
 ```
 
